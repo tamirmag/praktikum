@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Page Title</title>
+
+<script>
+function calc(){
+  amount = document.getElementById("amount").value
+  num = document.getElementById("num").value
+  prod1 = document.getElementById("prod1").value
+  prod2 = document.getElementById("prod2").value
+  prod3 = document.getElementById("prod3").value
+  prod4 = document.getElementById("prod4").value
+
+  var xhttp = new XMLHttpRequest();
+  xhttp.open("GET", "https://tamirmag.pythonanywhere.com/calc/"+amount+"/"+num+"/"+prod1+"/"+prod2+"/"+prod3+"/"+prod4+"/1", false);
+  xhttp.send();
+  var res = JSON.parse(xhttp.responseText)
+  var ans = "פיזור ההשקעה האידיאלי הוא<br>"
+  + res.international + " בהשקעה איזורית <br>"
+  for(i=1;i<=res.locals.length;i++){
+  ans = ans + res.locals[i-1] + " במוצר מספר " + i +"<br>"
+  }
+  document.getElementById("demo").innerHTML = ans;
+}
+</script>
+<style>
+.center {
+  margin: auto;
+  width: 60%;
+  border: 3px solid #73AD21;
+  padding: 10px;
+}
+</style>
+</head>
+<body class="center" dir="rtl">
+
+
+כמות הכסף הרציה להשקעה ב promotion ביבשת <br>
+<input type="number" id="amount" value="0"><br>
+כמות המוצרים המשווקים ביבשת <br>
+<input type="number" id="num" value="0"><br>
+awareness נוכחי של מוצר מספר 1 <br>
+<input type="number" id="prod1" value="0"><br>
+awareness נוכחי של מוצר מספר 2 <br>
+<input type="number" id="prod2" value="0"><br>
+awareness נוכחי של מוצר מספר 3 <br>
+<input type="number" id="prod3" value="0"><br>
+awareness נוכחי של מוצר מספר 4 <br>
+<input type="number" id="prod4" value="0"><br>
+<button onclick="calc()">חשב</button><br>
+
+<div id="demo" dir="rtl"></div>
+</body>
+</html>
